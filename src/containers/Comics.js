@@ -32,6 +32,7 @@ const Comics = props => {
       setData(response.data);
       console.log(response.data);
       setIsLoading(false);
+      setOffset(parseInt(response.data.message.data.offset));
     };
 
     fetchData();

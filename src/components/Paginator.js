@@ -1,13 +1,6 @@
 import React from "react";
 
-const Paginator = ({
-  totalItem,
-  limit,
-  offset,
-  search,
-  setQuery,
-  changeQuery
-}) => {
+const Paginator = ({ totalItem, limit, offset, changeQuery }) => {
   const totalPages = parseInt(parseInt(totalItem) / parseInt(limit));
   console.log("total-item", totalItem);
   console.log(totalPages);
