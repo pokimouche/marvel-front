@@ -19,7 +19,7 @@ const LoginBtn = ({ setModal, setUser, user }) => {
           Se connecter
         </button>
       ) : (
-        <button onClick={logOut} className="login-btn">
+        <button onClick={logOut} className="logOut-btn">
           <span>Se déconnecter</span>
         </button>
       )}
