@@ -55,6 +55,8 @@ const Characters = props => {
             changeQuery={changeQuery}
           ></Paginator>
           <CharactersItemList
+            favoriteData={props.favoriteData}
+            setFavoriteData={props.setFavoriteData}
             user={props.user}
             items={data.message.data.results}
           ></CharactersItemList>

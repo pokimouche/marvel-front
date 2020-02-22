@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import axios from "axios";
 import Cookies from "js-cookie";
 import "./css/reset.css";
 import "./App.css";
@@ -26,7 +27,41 @@ function App() {
   const [modal, setModal] = useState(false);
 
   const [user, setUser] = useState(newState);
-  console.log(user, "utilisateur");
+  const [favoriteData, setFavoriteData] = useState({
+    characters: [],
+    comics: []
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (user !== null) {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_DOMAIN}/favorites`,
+          {
+            headers: {
+              Authorization: "Bearer " + user.token,
+              "Content-Type": "multipart/form-data"
+            }
+          }
+        );
+
+        const favoriteArray = response.data.reduce(
+          (object, element) => {
+            object[element.category].push(element.favoriteId);
+            return object;
+          },
+          { characters: [], comics: [] }
+        );
+
+        setFavoriteData(favoriteArray);
+      } else {
+        setFavoriteData({ characters: [], comics: [] });
+      }
+    };
+    fetchData();
+  }, [user]);
+
+  console.log("utilisateur", user, "favorites", favoriteData);
 
   return (
     <Router>
@@ -47,7 +82,11 @@ function App() {
           <CharacterCard></CharacterCard>
         </Route>
         <Route path="/">
-          <Characters user={user}></Characters>
+          <Characters
+            setFavoriteData={setFavoriteData}
+            favoriteData={favoriteData}
+            user={user}
+          ></Characters>
         </Route>
       </Switch>
 

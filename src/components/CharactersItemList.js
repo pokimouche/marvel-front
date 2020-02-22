@@ -10,6 +10,8 @@ const CharactersItemList = props => {
             key={element.id}
             {...element}
             user={props.user}
+            favoriteData={props.favoriteData}
+            setFavoriteData={props.setFavoriteData}
           ></CharactersItem>
         );
       })}

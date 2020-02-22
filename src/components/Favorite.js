@@ -1,7 +1,13 @@
 import React from "react";
 import axios from "axios";
 
-const Favorite = ({ user, category, itemId }) => {
+const Favorite = ({
+  user,
+  category,
+  itemId,
+  favoriteData,
+  setFavoriteData
+}) => {
   const addFavorite = async event => {
     const formData = new FormData();
 
@@ -18,6 +24,14 @@ const Favorite = ({ user, category, itemId }) => {
         }
       }
     );
+    console.log("status", response.status);
+    if (response.status === 200) {
+      const newFavoriteData = { ...favoriteData };
+      newFavoriteData[category].push(itemId);
+      console.log(newFavoriteData);
+
+      setFavoriteData(newFavoriteData);
+    }
   };
 
   const deleteFavorite = async event => {
@@ -36,14 +50,37 @@ const Favorite = ({ user, category, itemId }) => {
         }
       }
     );
-  };
+    if (response.status === 200) {
+      const newFavoriteData = { ...favoriteData };
 
+      newFavoriteData[category].splice(
+        newFavoriteData[category].indexOf(itemId),
+        1
+      );
+      console.log(response);
+      setFavoriteData(newFavoriteData);
+    }
+  };
+  // console.log(
+  //   "test-index",
+  //   favoriteData[category].indexOf(itemId),
+  //   "itemId",
+  //   itemId
+  // );
   return (
     <>
       {user !== undefined && user !== null ? (
-        <div className="favorite-btn" onClick={addFavorite}>
-          <img src="/favorite-true.svg" alt="favorite"></img>
-        </div>
+        <>
+          {favoriteData[category].indexOf(itemId) !== -1 ? (
+            <div className="favorite-btn" onClick={deleteFavorite}>
+              <img src="/favorite-true.svg" alt="favorite"></img>
+            </div>
+          ) : (
+            <div className="favorite-btn" onClick={addFavorite}>
+              <img src="/favorite-false.svg" alt="favorite"></img>
+            </div>
+          )}
+        </>
       ) : null}
     </>
   );
