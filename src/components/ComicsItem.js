@@ -2,7 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Favorite from "./Favorite";
 
-const ComicsItem = ({ id, title, description, thumbnail, user }) => {
+const ComicsItem = ({
+  id,
+  title,
+  description,
+  thumbnail,
+  user,
+  favoriteData,
+  setFavoriteData
+}) => {
   const category = "comics";
   console.log(title);
   return (
@@ -18,7 +26,13 @@ const ComicsItem = ({ id, title, description, thumbnail, user }) => {
           <p className="item-description>">{description}</p>
         </div>
       </Link>
-      <Favorite itemId={id} category={category} user={user}></Favorite>
+      <Favorite
+        itemId={id}
+        category={category}
+        user={user}
+        favoriteData={favoriteData}
+        setFavoriteData={setFavoriteData}
+      ></Favorite>
     </li>
   );
 };

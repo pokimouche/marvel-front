@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 
-const Search = ({ setSearch, changeQuery }) => {
-  const [searchText, setSearchText] = useState("");
+const Search = ({ search, setSearch, changeQuery }) => {
   const handleSearch = event => {
     const newSearchText = event.target.value;
-    setSearchText(newSearchText);
+
+    setSearch(newSearchText);
   };
 
   const submitSearch = event => {
-    const newSearchText = event.target.value;
     const offset = 0;
-    if (event.keyCode === 13 && newSearchText.length > 3) {
-      setSearch(newSearchText);
+    console.log("keycode", event.keyCode);
+
+    if (event.keyCode === 13 && search.length > 3) {
+      console.log("search", search);
+
       changeQuery(offset);
     }
   };
@@ -22,7 +24,7 @@ const Search = ({ setSearch, changeQuery }) => {
         onKeyUp={submitSearch}
         onChange={handleSearch}
         type="text"
-        value={searchText}
+        value={search}
       ></input>
     </div>
   );

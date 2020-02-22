@@ -41,7 +41,11 @@ const Characters = props => {
 
   return (
     <main className="container">
-      <Search setSearch={setSearch} changeQuery={changeQuery}></Search>
+      <Search
+        setSearch={setSearch}
+        search={search}
+        changeQuery={changeQuery}
+      ></Search>
       {isLoading === true ? (
         <Loader></Loader>
       ) : (

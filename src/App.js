@@ -11,7 +11,6 @@ import Comics from "./containers/Comics";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import AccountCreation from "./containers/AccountCreation";
-import LoginBtn from "./components/LoginBtn";
 import Login from "./components/Login";
 
 function App() {
@@ -72,7 +71,11 @@ function App() {
           <AccountCreation user={user} setUser={setUser}></AccountCreation>
         </Route>
         <Route path="/comics">
-          <Comics user={user}></Comics>
+          <Comics
+            user={user}
+            setFavoriteData={setFavoriteData}
+            favoriteData={favoriteData}
+          ></Comics>
         </Route>
 
         <Route path="/comic/:id">

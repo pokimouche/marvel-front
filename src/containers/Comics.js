@@ -40,7 +40,11 @@ const Comics = props => {
 
   return (
     <main className="container">
-      <Search setSearch={setSearch} changeQuery={changeQuery}></Search>
+      <Search
+        search={search}
+        setSearch={setSearch}
+        changeQuery={changeQuery}
+      ></Search>
       {isLoading === true ? (
         <Loader></Loader>
       ) : (
@@ -54,6 +58,8 @@ const Comics = props => {
             changeQuery={changeQuery}
           ></Paginator>
           <ComicsItemList
+            favoriteData={props.favoriteData}
+            setFavoriteData={props.setFavoriteData}
             user={props.user}
             items={data.message.data.results}
           ></ComicsItemList>
