@@ -14,7 +14,7 @@ const CharactersItem = ({
   const category = "characters";
   return (
     <li className="item-wrapper">
-      <Link className="item-link" to={`/character/${id}`}>
+      <Link className="item-link" to={`/characters/${id}`}>
         <img
           className="small-thumbnail"
           src={`${thumbnail.path}.${thumbnail.extension}`}

@@ -81,7 +81,7 @@ function App() {
         <Route path="/comic/:id">
           <ComicCard></ComicCard>
         </Route>
-        <Route path="/character/:id">
+        <Route path="/characters/:id">
           <CharacterCard></CharacterCard>
         </Route>
         <Route path="/">
