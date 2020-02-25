@@ -12,10 +12,7 @@ const Item = ({
 }) => {
   return (
     <li className="item-wrapper">
-      <Link
-        className="item-link"
-        to={`/${category}/${itemAttributes[categoryAttributes.id]}`}
-      >
+      <div className="item-content-wrapper">
         <img
           className="small-thumbnail"
           src={`${itemAttributes[categoryAttributes.thumbnail].path}.${
@@ -27,18 +24,25 @@ const Item = ({
           <h2 className="item-title">
             {itemAttributes[categoryAttributes.name]}
           </h2>
-          <p className="item-description>">
+          <p className="item-description">
             {itemAttributes[categoryAttributes.description]}
           </p>
         </div>
-      </Link>
-      <Favorite
-        itemId={itemAttributes[categoryAttributes.id]}
-        category={category}
-        user={user}
-        favoriteData={favoriteData}
-        setFavoriteData={setFavoriteData}
-      ></Favorite>
+        <Link
+          className="item-link"
+          to={`/${category}/${itemAttributes[categoryAttributes.id]}`}
+        >
+          {categoryAttributes.itemTextLink}
+        </Link>
+
+        <Favorite
+          itemId={itemAttributes[categoryAttributes.id]}
+          category={category}
+          user={user}
+          favoriteData={favoriteData}
+          setFavoriteData={setFavoriteData}
+        ></Favorite>
+      </div>
     </li>
   );
 };

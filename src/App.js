@@ -70,6 +70,14 @@ function App() {
         <Route path="/account/creation">
           <AccountCreation user={user} setUser={setUser}></AccountCreation>
         </Route>
+
+        <Route path="/comics/:id">
+          <ComicCard
+            user={user}
+            setFavoriteData={setFavoriteData}
+            favoriteData={favoriteData}
+          ></ComicCard>
+        </Route>
         <Route path="/comics">
           <Comics
             user={user}
@@ -77,12 +85,12 @@ function App() {
             favoriteData={favoriteData}
           ></Comics>
         </Route>
-
-        <Route path="/comic/:id">
-          <ComicCard></ComicCard>
-        </Route>
         <Route path="/characters/:id">
-          <CharacterCard></CharacterCard>
+          <CharacterCard
+            user={user}
+            setFavoriteData={setFavoriteData}
+            favoriteData={favoriteData}
+          ></CharacterCard>
         </Route>
         <Route path="/">
           <Characters

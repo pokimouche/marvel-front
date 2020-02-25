@@ -2,14 +2,24 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loader from "../components/Loader";
+import ItemList from "../components/ItemList";
 const CharacterCard = props => {
+  const categoryAttributes = {
+    id: "id",
+    name: "title",
+    description: "description",
+    thumbnail: "thumbnail",
+    querySearch: "titleStartsWith",
+    itemTextLink: "Voir les personnages"
+  };
+
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const [data, setData] = useState({});
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_DOMAIN}/characters/${id}`
+        `${process.env.REACT_APP_API_DOMAIN}/characters/${id}/comics`
       );
 
       setData(response.data);
@@ -25,24 +35,14 @@ const CharacterCard = props => {
       {isLoading === true ? (
         <Loader></Loader>
       ) : (
-        <>
-          {data.message.data.results.map(element => {
-            return (
-              <section>
-                <h1>{element.name}</h1>
-                <ul>
-                  {element.comics.items.map(comicsElement => {
-                    return (
-                      <li>
-                        <h2>{comicsElement.name}</h2>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </section>
-            );
-          })}
-        </>
+        <ItemList
+          categoryAttributes={categoryAttributes}
+          favoriteData={props.favoriteData}
+          setFavoriteData={props.setFavoriteData}
+          user={props.user}
+          items={data.message.data.results}
+          category="comics"
+        ></ItemList>
       )}
     </main>
   );

@@ -7,7 +7,8 @@ const Characters = props => {
     name: "name",
     description: "description",
     thumbnail: "thumbnail",
-    querySearch: "nameStartsWith"
+    querySearch: "nameStartsWith",
+    itemTextLink: "Voir les comics"
   };
 
   return (
